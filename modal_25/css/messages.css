@@ -1,0 +1,128 @@
+.ccv_error {
+    margin-right: 15px;
+}
+
+.grid {
+    width: 800px !important;
+    height: 500px;
+    margin-bottom: 4%;
+}
+
+.ui-grid-viewport {
+    overflow: auto !important;
+    width: auto !important;
+}
+
+table.provider tr td.firstCol{
+    width: 35%;
+}
+.accordion-subtitle{
+    margin-left: 15px;
+}
+.ccv_warning {
+    margin-right: 14px;
+}
+.ccv-position{
+    position: absolute;
+    top: 11px;
+    right: 37px;
+    font-size: 16px !important;
+}
+.antic-ccc{
+    text-decoration:line-through;    
+}
+.incentive-modal-header{
+        border-right: 2px solid;
+        padding-right: 52px;
+      vertical-align: top;
+}
+.incentives-modal tr td {
+     padding: 9px;
+    text-align: left;
+    text-shadow: 1px 1px 1px #fff;
+}
+.incentives-close-button{
+        margin-top: -100px;
+}
+.claimpointer-pointer{
+   cursor: pointer;
+    margin-bottom: 37px;
+    margin-left: 55px;
+}
+.programwidth{
+    padding: 6px;
+}
+.programcolumn{
+    background-color: rgb(220, 230, 241);
+}  
+.programcolumns{
+    background-color: #bce8f1; 
+}
+.incentiveswidth{
+    width:1220px;
+}
+.goalgrey
+{
+  color:grey !important;
+  line-height: 1.42857143;
+}
+.goalred
+{
+   color: rgba(244, 67, 54, 0.92); !important;
+   line-height: 1.42857143;        
+}
+.goalblack
+{
+    color: #333;
+    line-height: 1.42857143; 
+    font-weight:normal;
+} 
+.incentheader tr{
+ background-color: #d9edf7;
+border-color: #bce8f1; 
+}
+.incentheader tr:nth-child(2){
+  background-color:#abe2ed;  
+}
+.incentgooal{
+    background-color: #e4ecac; !important;
+    font-weight: normal;
+}
+.incentgroup{
+  color: #31708f; 
+  background-color: #d9edf7;
+  vertical-align: top;
+}
+.incentfont{
+    font-weight: normal;
+}
+.incentborder{
+    border-bottom: 0px;
+    overflow-x: inherit !important;
+    padding: 4px;
+    background-color: white; 
+}
+
+.incentivesdate{
+    
+  margin: 0 0 0px;
+}
+.customergoal{
+ padding-left: 40px; 
+ padding-bottom: 6px;
+}
+.expbutton{
+    margin-left: -3px;
+    cursor: default;
+    display: inline-block;
+    margin-top: 5px;
+    padding-right: 0px;
+    
+}
+.expandbutton{
+    padding-left: 2px;
+    padding-right: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px; 
+    
+}

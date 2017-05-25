@@ -1,0 +1,714 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" >
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Static Template</title>
+	<link rel="stylesheet" type="text/css" href="components/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="components/bootstrap/css/bootstrap.min.css.map" />
+	 <!-- <link rel="stylesheet" type="text/css" href="css/style.css" /> -->
+	<link rel="stylesheet" type="text/css" href="css/messages.css" />
+    <link rel="stylesheet" type="text/css" href="css/medical.css" />
+    <link rel="stylesheet" type="text/css" href="css/claims.css" />
+	<!--http://wpsparrow.com/wordpress/elbrus/-->
+</head>
+<body lang="en">
+	<!-- Button trigger modal -->
+	<br/>
+	<div class="container text-center">
+		<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">
+		  Launch demo modal
+		</button>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade incentives-dialog" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog modal-lg incentiveswidth" role="document">
+	    <div class="modal-content incentborder">
+	      <div class="table-responsive fixed-overlay"> 
+
+
+            <table class="table table-bordered table-responsive incentives-modal" style="top:0px; padding: 0px; margin-bottom: 0px;">
+
+                    <thead class="incentheader fixed-header">
+                        <tr class="panel-table-row incentives-panel-table-label">
+                            <th class="incentive-modal-header" style="vertical-align: top;">
+                                <!-- ngIf: contentData.summary.planname=='MotivateMe' --><p class="incentivesdate ng-scope" ng-if="contentData.summary.planname=='MotivateMe'">Motivate<i>Me</i> Incentives</p><!-- end ngIf: contentData.summary.planname=='MotivateMe' -->
+                                <!-- ngIf: contentData.summary.planname!=='MotivateMe' -->
+                                <p class="incentivesdate ng-binding" style="font-weight: normal;">01/01/2017 - 12/31/2017</p>
+                                <span class="expbutton">
+                    <span class="toggle-panel btn btn-default btn-sm expandbutton" role="button" ng-show="goalview.collapsed" ng-click="onExpand('both','+')" title="Expand All"><i class="glyphicon glyphicon-plus"></i> Expand All</span>
+                                </span>
+                            </th>
+                            <th class="incentive-modal-header" style="vertical-align: top;">
+                                <!-- ngIf: contentData.summary.captype!='Family' --><p ng-if="contentData.summary.captype!='Family'" class="incentivesdate ng-scope" style="padding-bottom: 5px;">Individual Total Max:</p><!-- end ngIf: contentData.summary.captype!='Family' -->
+                                <!-- ngIf: contentData.summary.captype=='Family' -->
+                                <!-- ngRepeat: eachval in contentData.summary.individualmax --><p ng-repeat="eachval in contentData.summary.individualmax" style="line-height: 5px;font-weight: normal;" class="ng-scope">
+                                    <!-- ngIf: eachval.unit == 'dollars' -->
+                                    <!-- ngIf: eachval.unit != 'dollars' --><span ng-if="eachval.unit != 'dollars'" class="ng-scope">
+                                <span class="ng-binding">600<span ng-bind="eachval.unit | symbol" class="ng-binding"> points</span></span>
+                                    </span><!-- end ngIf: eachval.unit != 'dollars' -->
+                                </p><!-- end ngRepeat: eachval in contentData.summary.individualmax -->
+                            </th>
+                            <th class="incentive-modal-header" style=" vertical-align: top;">
+                                <p class="incentivesdate" style="padding-bottom:5px;">Total Earned This Year:</p>
+                                <!-- ngRepeat: eachval in contentData.summary.earned --><p ng-repeat="eachval in contentData.summary.earned" style="line-height: 5px;font-weight: normal;" class="ng-scope">
+                                    <!-- ngIf: eachval.unit == 'dollars' -->
+                                    <!-- ngIf: eachval.unit != 'dollars' --><span ng-if="eachval.unit != 'dollars'" class="ng-scope">
+                                <span class="ng-binding">50<span ng-bind="eachval.unit | symbol" class="ng-binding"> points</span></span>
+                                    </span><!-- end ngIf: eachval.unit != 'dollars' -->
+                                </p><!-- end ngRepeat: eachval in contentData.summary.earned -->
+                            </th>
+                            <th class="incentive-modal-header" colspan="4" style="vertical-align: top;text-align:left;">
+                                <span style="line-height: 5px;">Customer Name:
+                                   <span style="font-weight: normal;" class="ng-binding"> Elmo Gay</span>
+                                </span>
+                            </th>
+                            <th colspan="1" style="vertical-align: top;font-weight: normal;">
+                                <button type="button" class="btn btn-sm btn-warning pull-right" data-dismiss="modal" title="Close"><i class="glyphicon glyphicon-remove"></i></button>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="tablecell" colspan="3">Programs/Goals</th>
+                            <th class="tablecell">Program Max</th>
+                            <th class="tablecell">Earned</th>
+                            <th class="tablecell">Value</th>
+                            <th class="tablecell">Freq.</th>
+                            <th class="tablecell">Awarded</th>
+                            <th class="tablecell">Start / End Date</th>
+                            <th class="tablecell">Redemption</th>
+                        </tr>
+                    </thead>                   
+                    
+                    
+
+                    <tbody ng-repeat="contentData in contentData.groups | orderBy:'order'" ng-class="(contentData.type==='combined') ||(contentData.groupmax !== null &amp;&amp; contentData.groupearned !== null) ?
+                                     'group-border' : ''" class="ng-scope group-border">
+                       <!-- end ngRepeat: goalobj in contentData.programs[$index].goals --><!-- end ngRepeat: progobj in contentData.programs track by $index -->
+
+                        <!-- ngRepeat: goalobj in contentData.programs[$index].goals -->
+
+                        <tr class="panel-table-row ng-scope goalblack" style="background-color: #EBF1C1 !important;font-weight: normal;" ng-repeat-end="" ng-repeat="goalobj in contentData.programs[$index].goals" ng-class="goalobj.gkindicator===true ? 
+                                      goalobj.goalmet === true ? 'goalblack':'goalblack' : 
+                                      goalobj.goalmet === true ?'goalblack':'goalblack'">
+
+                          <td>
+                            <table>
+                                <tr>
+                                    <td ng-show="goalobj.gkrulecode" class="ng-binding ng-hide">one two, three</td>
+                                    <td ng-show="goalobj.gkrulecode" colspan="2" class="ng-hide">
+                                        <span title="Gatekeeper" style="cursor:pointer" class="label label-danger">GK</span>
+                                        <span ng-click="expandGoal(goalobj)" class="ng-binding">
+                                        <!-- ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname --><i ng-show="!goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname" style="cursor:pointer;font-size: 12px" class="ng-scope">+</i><!-- end ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname -->
+                                        <!-- ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname --><i ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname" style="cursor:pointer;font-size: 12px" class="ng-scope ng-hide">-</i><!-- end ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname -->
+                                        Improve your Nutrition</span>
+                                        <br>
+                                        <div class="customergoal ng-binding ng-hide" ng-show="goalobj.expand" ng-bind="goalobj.clientgoalname"></div>
+                                        <!-- ngRepeat: val in goalobj.goaldescriptions track by $index --><!-- ngIf: goalobj.goaldescriptions.length!==0 --><ul ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0" ng-repeat="val in goalobj.goaldescriptions track by $index" style="list-style:none;" class="ng-scope ng-hide">
+                                            <li ng-bind-html="val" class="ng-binding"><p>Eating healthy is essential to your overall well-being. Complete the Eat Better online program to get your nutrition back on track.</p></li>
+                                        </ul><!-- end ngIf: goalobj.goaldescriptions.length!==0 --><!-- end ngRepeat: val in goalobj.goaldescriptions track by $index --><!-- ngIf: goalobj.goaldescriptions.length!==0 --><ul ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0" ng-repeat="val in goalobj.goaldescriptions track by $index" style="list-style:none;" class="ng-scope ng-hide">
+                                            <li ng-bind-html="val" class="ng-binding"><p>If you are unable to meet this goal, you may still be able to earn the award. Download the physician recommendation form, work with your doctor to create an alternate goal that is right for you, then submit the form to get credit and earn the award.</p></li>
+                                        </ul><!-- end ngIf: goalobj.goaldescriptions.length!==0 --><!-- end ngRepeat: val in goalobj.goaldescriptions track by $index -->
+                                    </td>
+                                </tr>
+                            </table>
+                          </td>
+                            
+                            
+                            
+                            <td>
+                                <!-- ngIf: goalobj.goalexcluded -->
+                            </td>
+                            <td><!-- ngIf: goalobj.earned.unit == 'dollars' -->
+                                <!-- ngIf: goalobj.earned.unit != 'dollars' --><span ng-if="goalobj.earned.unit != 'dollars'" class="ng-scope">
+                                <span class="ng-binding"> 
+                                    <span ng-bind="goalobj.earned.unit | symbol" class="ng-binding"></span></span>
+                                </span><!-- end ngIf: goalobj.earned.unit != 'dollars' -->
+                            </td>
+                            <td>
+
+
+
+                                <!-- ngRepeat: eachgoalval in goalobj.goalvalue --><p ng-repeat="eachgoalval in goalobj.goalvalue" style="line-height: 20px; font-weight: normal;" class="incentivesdate ng-scope">
+                                    <!-- ngIf: eachgoalval.unit == 'dollars' -->
+                                    <!-- ngIf: eachgoalval.unit != 'dollars' --><span ng-if="eachgoalval.unit != 'dollars'" class="ng-scope">
+                                <span class="ng-binding">25<span ng-bind="eachgoalval.unit | symbol" class="ng-binding"> points</span></span>
+                                    </span><!-- end ngIf: eachgoalval.unit != 'dollars' -->
+                                </p><!-- end ngRepeat: eachgoalval in goalobj.goalvalue -->
+                            </td>
+                            <!--<td> <span ng-bind="goalobj.frequency"></span> </td>-->
+                            <td> <span ng-show="goalobj.completedfreq" ng-bind="goalobj.completedfreq" class="ng-binding ng-hide">0</span> <span ng-show="goalobj.completedfreq" class="ng-hide">of</span> <span ng-show="goalobj.frequency" ng-bind="goalobj.frequency" class="ng-binding">1</span></td>
+                            <td> <!-- ngIf: goalobj.goalmet  && contentData.type == 'combined' --><span ng-bind="goalobj.rewardeddate" class="ng-binding"></span> </td>
+                            <!--<td> <span ng-bind="goalobj.startdate"></span>
+                                <span ng-if="goalobj.startdate !== null">-</span>
+                                <span ng-bind="goalobj.enddate"></span></td>-->
+                            <td>
+                                <!-- ngRepeat: rewardedDate in goalobj.rewardDates --><p ng-repeat="rewardedDate in goalobj.rewardDates" class="incentivesdate ng-scope">
+
+                                    <span ng-bind="rewardedDate.startDate" class="ng-binding">01/01/2017</span> -
+                                    <span ng-bind="rewardedDate.endDate" class="ng-binding">12/01/2017</span>
+                                </p><!-- end ngRepeat: rewardedDate in goalobj.rewardDates -->
+                                <!-- ngIf: !(goalobj.rewardDates) -->
+                            </td>
+                            <td></td>
+                        </tr><!-- end ngRepeat: goalobj in contentData.programs[$index].goals -->
+
+                        <tr class="panel-table-row ng-scope goalblack" style="background-color: #EBF1C1 !important;font-weight: normal;" ng-repeat-end="" ng-repeat="goalobj in contentData.programs[$index].goals" ng-class="goalobj.gkindicator===true ? 
+                                      goalobj.goalmet === true ? 'goalblack':'goalblack' : 
+                                      goalobj.goalmet === true ?'goalblack':'goalblack'">
+                            <td>
+                            <table>
+                                <tr>
+                                    <td ng-show="goalobj.gkrulecode" class="ng-binding ng-hide">one two, three</td>
+                                    <td ng-show="goalobj.gkrulecode" colspan="2" class="ng-hide">
+                                        <span title="Gatekeeper" style="cursor:pointer" class="label label-danger">GK</span>
+                                        <span ng-click="expandGoal(goalobj)" class="ng-binding">
+                                        <!-- ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname --><i ng-show="!goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname" style="cursor:pointer;font-size: 12px" class="ng-scope">+</i><!-- end ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname -->
+                                        <!-- ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname --><i ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname" style="cursor:pointer;font-size: 12px" class="ng-scope ng-hide">-</i><!-- end ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname -->
+                                        Improve your Nutrition</span>
+                                        <br>
+                                        <div class="customergoal ng-binding ng-hide" ng-show="goalobj.expand" ng-bind="goalobj.clientgoalname"></div>
+                                        <!-- ngRepeat: val in goalobj.goaldescriptions track by $index --><!-- ngIf: goalobj.goaldescriptions.length!==0 --><ul ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0" ng-repeat="val in goalobj.goaldescriptions track by $index" style="list-style:none;" class="ng-scope ng-hide">
+                                            <li ng-bind-html="val" class="ng-binding"><p>Eating healthy is essential to your overall well-being. Complete the Eat Better online program to get your nutrition back on track.</p></li>
+                                        </ul><!-- end ngIf: goalobj.goaldescriptions.length!==0 --><!-- end ngRepeat: val in goalobj.goaldescriptions track by $index --><!-- ngIf: goalobj.goaldescriptions.length!==0 --><ul ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0" ng-repeat="val in goalobj.goaldescriptions track by $index" style="list-style:none;" class="ng-scope ng-hide">
+                                            <li ng-bind-html="val" class="ng-binding"><p>If you are unable to meet this goal, you may still be able to earn the award. Download the physician recommendation form, work with your doctor to create an alternate goal that is right for you, then submit the form to get credit and earn the award.</p></li>
+                                        </ul><!-- end ngIf: goalobj.goaldescriptions.length!==0 --><!-- end ngRepeat: val in goalobj.goaldescriptions track by $index -->
+                                    </td>
+                                </tr>
+                            </table>
+                          </td>
+                            <td>
+                                <!-- ngIf: goalobj.goalexcluded -->
+                            </td>
+                            <td><!-- ngIf: goalobj.earned.unit == 'dollars' -->
+                                <!-- ngIf: goalobj.earned.unit != 'dollars' --><span ng-if="goalobj.earned.unit != 'dollars'" class="ng-scope">
+                                <span class="ng-binding"> 
+                                    <span ng-bind="goalobj.earned.unit | symbol" class="ng-binding"></span></span>
+                                </span><!-- end ngIf: goalobj.earned.unit != 'dollars' -->
+                            </td>
+                            <td>
+
+
+
+                                <!-- ngRepeat: eachgoalval in goalobj.goalvalue --><p ng-repeat="eachgoalval in goalobj.goalvalue" style="line-height: 20px; font-weight: normal;" class="incentivesdate ng-scope">
+                                    <!-- ngIf: eachgoalval.unit == 'dollars' -->
+                                    <!-- ngIf: eachgoalval.unit != 'dollars' --><span ng-if="eachgoalval.unit != 'dollars'" class="ng-scope">
+                                <span class="ng-binding">25<span ng-bind="eachgoalval.unit | symbol" class="ng-binding"> points</span></span>
+                                    </span><!-- end ngIf: eachgoalval.unit != 'dollars' -->
+                                </p><!-- end ngRepeat: eachgoalval in goalobj.goalvalue -->
+                            </td>
+                            <!--<td> <span ng-bind="goalobj.frequency"></span> </td>-->
+                            <td> <span ng-show="goalobj.completedfreq" ng-bind="goalobj.completedfreq" class="ng-binding ng-hide">0</span> <span ng-show="goalobj.completedfreq" class="ng-hide">of</span> <span ng-show="goalobj.frequency" ng-bind="goalobj.frequency" class="ng-binding">1</span></td>
+                            <td> <!-- ngIf: goalobj.goalmet  && contentData.type == 'combined' --><span ng-bind="goalobj.rewardeddate" class="ng-binding"></span> </td>
+                            <!--<td> <span ng-bind="goalobj.startdate"></span>
+                                <span ng-if="goalobj.startdate !== null">-</span>
+                                <span ng-bind="goalobj.enddate"></span></td>-->
+                            <td>
+                                <!-- ngRepeat: rewardedDate in goalobj.rewardDates --><p ng-repeat="rewardedDate in goalobj.rewardDates" class="incentivesdate ng-scope">
+
+                                    <span ng-bind="rewardedDate.startDate" class="ng-binding">01/01/2017</span> -
+                                    <span ng-bind="rewardedDate.endDate" class="ng-binding">12/01/2017</span>
+                                </p><!-- end ngRepeat: rewardedDate in goalobj.rewardDates -->
+                                <!-- ngIf: !(goalobj.rewardDates) -->
+                            </td>
+                            <td></td>
+                        </tr><!-- end ngRepeat: goalobj in contentData.programs[$index].goals -->
+
+                        <tr class="panel-table-row ng-scope goalblack" style="background-color: #EBF1C1 !important;font-weight: normal;" ng-repeat-end="" ng-repeat="goalobj in contentData.programs[$index].goals" ng-class="goalobj.gkindicator===true ? 
+                                      goalobj.goalmet === true ? 'goalblack':'goalblack' : 
+                                      goalobj.goalmet === true ?'goalblack':'goalblack'">
+                            <td>
+                            <table>
+                                <tr>
+                                    <td ng-show="goalobj.gkrulecode" class="ng-binding ng-hide">one two, three</td>
+                                    <td ng-show="goalobj.gkrulecode" colspan="2" class="ng-hide">
+                                        <span title="Gatekeeper" style="cursor:pointer" class="label label-danger">GK</span>
+                                        <span ng-click="expandGoal(goalobj)" class="ng-binding">
+                                        <!-- ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname --><i ng-show="!goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname" style="cursor:pointer;font-size: 12px" class="ng-scope">+</i><!-- end ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname -->
+                                        <!-- ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname --><i ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname" style="cursor:pointer;font-size: 12px" class="ng-scope ng-hide">-</i><!-- end ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname -->
+                                        Improve your Nutrition</span>
+                                        <br>
+                                        <div class="customergoal ng-binding ng-hide" ng-show="goalobj.expand" ng-bind="goalobj.clientgoalname"></div>
+                                        <!-- ngRepeat: val in goalobj.goaldescriptions track by $index --><!-- ngIf: goalobj.goaldescriptions.length!==0 --><ul ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0" ng-repeat="val in goalobj.goaldescriptions track by $index" style="list-style:none;" class="ng-scope ng-hide">
+                                            <li ng-bind-html="val" class="ng-binding"><p>Eating healthy is essential to your overall well-being. Complete the Eat Better online program to get your nutrition back on track.</p></li>
+                                        </ul><!-- end ngIf: goalobj.goaldescriptions.length!==0 --><!-- end ngRepeat: val in goalobj.goaldescriptions track by $index --><!-- ngIf: goalobj.goaldescriptions.length!==0 --><ul ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0" ng-repeat="val in goalobj.goaldescriptions track by $index" style="list-style:none;" class="ng-scope ng-hide">
+                                            <li ng-bind-html="val" class="ng-binding"><p>If you are unable to meet this goal, you may still be able to earn the award. Download the physician recommendation form, work with your doctor to create an alternate goal that is right for you, then submit the form to get credit and earn the award.</p></li>
+                                        </ul><!-- end ngIf: goalobj.goaldescriptions.length!==0 --><!-- end ngRepeat: val in goalobj.goaldescriptions track by $index -->
+                                    </td>
+                                </tr>
+                            </table>
+                          </td>
+                            <td>
+                                <!-- ngIf: goalobj.goalexcluded -->
+                            </td>
+                            <td><!-- ngIf: goalobj.earned.unit == 'dollars' -->
+                                <!-- ngIf: goalobj.earned.unit != 'dollars' --><span ng-if="goalobj.earned.unit != 'dollars'" class="ng-scope">
+                                <span class="ng-binding"> 
+                                    <span ng-bind="goalobj.earned.unit | symbol" class="ng-binding"></span></span>
+                                </span><!-- end ngIf: goalobj.earned.unit != 'dollars' -->
+                            </td>
+                            <td>
+
+
+
+                                <!-- ngRepeat: eachgoalval in goalobj.goalvalue --><p ng-repeat="eachgoalval in goalobj.goalvalue" style="line-height: 20px; font-weight: normal;" class="incentivesdate ng-scope">
+                                    <!-- ngIf: eachgoalval.unit == 'dollars' -->
+                                    <!-- ngIf: eachgoalval.unit != 'dollars' --><span ng-if="eachgoalval.unit != 'dollars'" class="ng-scope">
+                                <span class="ng-binding">25<span ng-bind="eachgoalval.unit | symbol" class="ng-binding"> points</span></span>
+                                    </span><!-- end ngIf: eachgoalval.unit != 'dollars' -->
+                                </p><!-- end ngRepeat: eachgoalval in goalobj.goalvalue -->
+                            </td>
+                            <!--<td> <span ng-bind="goalobj.frequency"></span> </td>-->
+                            <td> <span ng-show="goalobj.completedfreq" ng-bind="goalobj.completedfreq" class="ng-binding ng-hide">0</span> <span ng-show="goalobj.completedfreq" class="ng-hide">of</span> <span ng-show="goalobj.frequency" ng-bind="goalobj.frequency" class="ng-binding">1</span></td>
+                            <td> <!-- ngIf: goalobj.goalmet  && contentData.type == 'combined' --><span ng-bind="goalobj.rewardeddate" class="ng-binding"></span> </td>
+                            <!--<td> <span ng-bind="goalobj.startdate"></span>
+                                <span ng-if="goalobj.startdate !== null">-</span>
+                                <span ng-bind="goalobj.enddate"></span></td>-->
+                            <td>
+                                <!-- ngRepeat: rewardedDate in goalobj.rewardDates --><p ng-repeat="rewardedDate in goalobj.rewardDates" class="incentivesdate ng-scope">
+
+                                    <span ng-bind="rewardedDate.startDate" class="ng-binding">01/01/2017</span> -
+                                    <span ng-bind="rewardedDate.endDate" class="ng-binding">12/01/2017</span>
+                                </p><!-- end ngRepeat: rewardedDate in goalobj.rewardDates -->
+                                <!-- ngIf: !(goalobj.rewardDates) -->
+                            </td>
+                            <td></td>
+                        </tr><!-- end ngRepeat: goalobj in contentData.programs[$index].goals -->
+
+                        <tr class="panel-table-row ng-scope goalblack" style="background-color: #EBF1C1 !important;font-weight: normal;" ng-repeat-end="" ng-repeat="goalobj in contentData.programs[$index].goals" ng-class="goalobj.gkindicator===true ? 
+                                      goalobj.goalmet === true ? 'goalblack':'goalblack' : 
+                                      goalobj.goalmet === true ?'goalblack':'goalblack'">
+                            <td>
+                            <table>
+                                <tr>
+                                    <td ng-show="goalobj.gkrulecode" class="ng-binding ng-hide">one two, three</td>
+                                    <td ng-show="goalobj.gkrulecode" colspan="2" class="ng-hide">
+                                        <span title="Gatekeeper" style="cursor:pointer" class="label label-danger">GK</span>
+                                        <span ng-click="expandGoal(goalobj)" class="ng-binding">
+                                        <!-- ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname --><i ng-show="!goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname" style="cursor:pointer;font-size: 12px" class="ng-scope">+</i><!-- end ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname -->
+                                        <!-- ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname --><i ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname" style="cursor:pointer;font-size: 12px" class="ng-scope ng-hide">-</i><!-- end ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname -->
+                                        Improve your Nutrition</span>
+                                        <br>
+                                        <div class="customergoal ng-binding ng-hide" ng-show="goalobj.expand" ng-bind="goalobj.clientgoalname"></div>
+                                        <!-- ngRepeat: val in goalobj.goaldescriptions track by $index --><!-- ngIf: goalobj.goaldescriptions.length!==0 --><ul ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0" ng-repeat="val in goalobj.goaldescriptions track by $index" style="list-style:none;" class="ng-scope ng-hide">
+                                            <li ng-bind-html="val" class="ng-binding"><p>Eating healthy is essential to your overall well-being. Complete the Eat Better online program to get your nutrition back on track.</p></li>
+                                        </ul><!-- end ngIf: goalobj.goaldescriptions.length!==0 --><!-- end ngRepeat: val in goalobj.goaldescriptions track by $index --><!-- ngIf: goalobj.goaldescriptions.length!==0 --><ul ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0" ng-repeat="val in goalobj.goaldescriptions track by $index" style="list-style:none;" class="ng-scope ng-hide">
+                                            <li ng-bind-html="val" class="ng-binding"><p>If you are unable to meet this goal, you may still be able to earn the award. Download the physician recommendation form, work with your doctor to create an alternate goal that is right for you, then submit the form to get credit and earn the award.</p></li>
+                                        </ul><!-- end ngIf: goalobj.goaldescriptions.length!==0 --><!-- end ngRepeat: val in goalobj.goaldescriptions track by $index -->
+                                    </td>
+                                </tr>
+                            </table>
+                          </td>
+                            <td>
+                                <!-- ngIf: goalobj.goalexcluded -->
+                            </td>
+                            <td><!-- ngIf: goalobj.earned.unit == 'dollars' -->
+                                <!-- ngIf: goalobj.earned.unit != 'dollars' --><span ng-if="goalobj.earned.unit != 'dollars'" class="ng-scope">
+                                <span class="ng-binding"> 
+                                    <span ng-bind="goalobj.earned.unit | symbol" class="ng-binding"></span></span>
+                                </span><!-- end ngIf: goalobj.earned.unit != 'dollars' -->
+                            </td>
+                            <td>
+
+
+
+                                <!-- ngRepeat: eachgoalval in goalobj.goalvalue --><p ng-repeat="eachgoalval in goalobj.goalvalue" style="line-height: 20px; font-weight: normal;" class="incentivesdate ng-scope">
+                                    <!-- ngIf: eachgoalval.unit == 'dollars' -->
+                                    <!-- ngIf: eachgoalval.unit != 'dollars' --><span ng-if="eachgoalval.unit != 'dollars'" class="ng-scope">
+                                <span class="ng-binding">25<span ng-bind="eachgoalval.unit | symbol" class="ng-binding"> points</span></span>
+                                    </span><!-- end ngIf: eachgoalval.unit != 'dollars' -->
+                                </p><!-- end ngRepeat: eachgoalval in goalobj.goalvalue -->
+                            </td>
+                            <!--<td> <span ng-bind="goalobj.frequency"></span> </td>-->
+                            <td> <span ng-show="goalobj.completedfreq" ng-bind="goalobj.completedfreq" class="ng-binding ng-hide">0</span> <span ng-show="goalobj.completedfreq" class="ng-hide">of</span> <span ng-show="goalobj.frequency" ng-bind="goalobj.frequency" class="ng-binding">1</span></td>
+                            <td> <!-- ngIf: goalobj.goalmet  && contentData.type == 'combined' --><span ng-bind="goalobj.rewardeddate" class="ng-binding"></span> </td>
+                            <!--<td> <span ng-bind="goalobj.startdate"></span>
+                                <span ng-if="goalobj.startdate !== null">-</span>
+                                <span ng-bind="goalobj.enddate"></span></td>-->
+                            <td>
+                                <!-- ngRepeat: rewardedDate in goalobj.rewardDates --><p ng-repeat="rewardedDate in goalobj.rewardDates" class="incentivesdate ng-scope">
+
+                                    <span ng-bind="rewardedDate.startDate" class="ng-binding">01/01/2017</span> -
+                                    <span ng-bind="rewardedDate.endDate" class="ng-binding">12/01/2017</span>
+                                </p><!-- end ngRepeat: rewardedDate in goalobj.rewardDates -->
+                                <!-- ngIf: !(goalobj.rewardDates) -->
+                            </td>
+                            <td></td>
+                        </tr><!-- end ngRepeat: goalobj in contentData.programs[$index].goals -->
+
+                        <tr class="panel-table-row ng-scope goalblack" style="background-color: #EBF1C1 !important;font-weight: normal;" ng-repeat-end="" ng-repeat="goalobj in contentData.programs[$index].goals" ng-class="goalobj.gkindicator===true ? 
+                                      goalobj.goalmet === true ? 'goalblack':'goalblack' : 
+                                      goalobj.goalmet === true ?'goalblack':'goalblack'">
+                            <td>
+                            <table>
+                                <tr>
+                                    <td ng-show="goalobj.gkrulecode" class="ng-binding ng-hide">one two, three</td>
+                                    <td ng-show="goalobj.gkrulecode" colspan="2" class="ng-hide">
+                                        <span title="Gatekeeper" style="cursor:pointer" class="label label-danger">GK</span>
+                                        <span ng-click="expandGoal(goalobj)" class="ng-binding">
+                                        <!-- ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname --><i ng-show="!goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname" style="cursor:pointer;font-size: 12px" class="ng-scope">+</i><!-- end ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname -->
+                                        <!-- ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname --><i ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname" style="cursor:pointer;font-size: 12px" class="ng-scope ng-hide">-</i><!-- end ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname -->
+                                        Improve your Nutrition</span>
+                                        <br>
+                                        <div class="customergoal ng-binding ng-hide" ng-show="goalobj.expand" ng-bind="goalobj.clientgoalname"></div>
+                                        <!-- ngRepeat: val in goalobj.goaldescriptions track by $index --><!-- ngIf: goalobj.goaldescriptions.length!==0 --><ul ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0" ng-repeat="val in goalobj.goaldescriptions track by $index" style="list-style:none;" class="ng-scope ng-hide">
+                                            <li ng-bind-html="val" class="ng-binding"><p>Eating healthy is essential to your overall well-being. Complete the Eat Better online program to get your nutrition back on track.</p></li>
+                                        </ul><!-- end ngIf: goalobj.goaldescriptions.length!==0 --><!-- end ngRepeat: val in goalobj.goaldescriptions track by $index --><!-- ngIf: goalobj.goaldescriptions.length!==0 --><ul ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0" ng-repeat="val in goalobj.goaldescriptions track by $index" style="list-style:none;" class="ng-scope ng-hide">
+                                            <li ng-bind-html="val" class="ng-binding"><p>If you are unable to meet this goal, you may still be able to earn the award. Download the physician recommendation form, work with your doctor to create an alternate goal that is right for you, then submit the form to get credit and earn the award.</p></li>
+                                        </ul><!-- end ngIf: goalobj.goaldescriptions.length!==0 --><!-- end ngRepeat: val in goalobj.goaldescriptions track by $index -->
+                                    </td>
+                                </tr>
+                            </table>
+                          </td>
+                            <td>
+                                <!-- ngIf: goalobj.goalexcluded -->
+                            </td>
+                            <td><!-- ngIf: goalobj.earned.unit == 'dollars' -->
+                                <!-- ngIf: goalobj.earned.unit != 'dollars' --><span ng-if="goalobj.earned.unit != 'dollars'" class="ng-scope">
+                                <span class="ng-binding"> 
+                                    <span ng-bind="goalobj.earned.unit | symbol" class="ng-binding"></span></span>
+                                </span><!-- end ngIf: goalobj.earned.unit != 'dollars' -->
+                            </td>
+                            <td>
+
+
+
+                                <!-- ngRepeat: eachgoalval in goalobj.goalvalue --><p ng-repeat="eachgoalval in goalobj.goalvalue" style="line-height: 20px; font-weight: normal;" class="incentivesdate ng-scope">
+                                    <!-- ngIf: eachgoalval.unit == 'dollars' -->
+                                    <!-- ngIf: eachgoalval.unit != 'dollars' --><span ng-if="eachgoalval.unit != 'dollars'" class="ng-scope">
+                                <span class="ng-binding">25<span ng-bind="eachgoalval.unit | symbol" class="ng-binding"> points</span></span>
+                                    </span><!-- end ngIf: eachgoalval.unit != 'dollars' -->
+                                </p><!-- end ngRepeat: eachgoalval in goalobj.goalvalue -->
+                            </td>
+                            <!--<td> <span ng-bind="goalobj.frequency"></span> </td>-->
+                            <td> <span ng-show="goalobj.completedfreq" ng-bind="goalobj.completedfreq" class="ng-binding ng-hide">0</span> <span ng-show="goalobj.completedfreq" class="ng-hide">of</span> <span ng-show="goalobj.frequency" ng-bind="goalobj.frequency" class="ng-binding">1</span></td>
+                            <td> <!-- ngIf: goalobj.goalmet  && contentData.type == 'combined' --><span ng-bind="goalobj.rewardeddate" class="ng-binding"></span> </td>
+                            <!--<td> <span ng-bind="goalobj.startdate"></span>
+                                <span ng-if="goalobj.startdate !== null">-</span>
+                                <span ng-bind="goalobj.enddate"></span></td>-->
+                            <td>
+                                <!-- ngRepeat: rewardedDate in goalobj.rewardDates --><p ng-repeat="rewardedDate in goalobj.rewardDates" class="incentivesdate ng-scope">
+
+                                    <span ng-bind="rewardedDate.startDate" class="ng-binding">01/01/2017</span> -
+                                    <span ng-bind="rewardedDate.endDate" class="ng-binding">12/01/2017</span>
+                                </p><!-- end ngRepeat: rewardedDate in goalobj.rewardDates -->
+                                <!-- ngIf: !(goalobj.rewardDates) -->
+                            </td>
+                            <td></td>
+                        </tr><!-- end ngRepeat: goalobj in contentData.programs[$index].goals -->
+
+                        <tr class="panel-table-row ng-scope goalblack" style="background-color: #EBF1C1 !important;font-weight: normal;" ng-repeat-end="" ng-repeat="goalobj in contentData.programs[$index].goals" ng-class="goalobj.gkindicator===true ? 
+                                      goalobj.goalmet === true ? 'goalblack':'goalblack' : 
+                                      goalobj.goalmet === true ?'goalblack':'goalblack'">
+                            <td ng-show="goalobj.gkrulecode" class="ng-binding ng-hide"></td>
+                            
+                            <td ng-show="goalobj.gkrulecode" colspan="2" class="ng-hide">
+                                <span title="Gatekeeper" style="cursor:pointer" class="label label-danger">GK</span>
+                                <span ng-click="expandGoal(goalobj)" class="ng-binding">
+                                <!-- ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname --><i ng-show="!goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname" style="cursor:pointer;font-size: 12px" class="ng-scope">+</i><!-- end ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname -->
+                                <!-- ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname --><i ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname" style="cursor:pointer;font-size: 12px" class="ng-scope ng-hide">-</i><!-- end ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname -->
+                                Control your Asthma</span>
+                                <br>
+                                <div class="customergoal ng-binding ng-hide" ng-show="goalobj.expand" ng-bind="goalobj.clientgoalname"></div>
+                                <!-- ngRepeat: val in goalobj.goaldescriptions track by $index --><!-- ngIf: goalobj.goaldescriptions.length!==0 --><ul ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0" ng-repeat="val in goalobj.goaldescriptions track by $index" style="list-style:none;" class="ng-scope ng-hide">
+                                    <li ng-bind-html="val" class="ng-binding"><p>Properly managing and controlling your asthma is essential for a long and productive life. Complete the Manage Asthma online program.</p></li>
+                                </ul><!-- end ngIf: goalobj.goaldescriptions.length!==0 --><!-- end ngRepeat: val in goalobj.goaldescriptions track by $index --><!-- ngIf: goalobj.goaldescriptions.length!==0 --><ul ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0" ng-repeat="val in goalobj.goaldescriptions track by $index" style="list-style:none;" class="ng-scope ng-hide">
+                                    <li ng-bind-html="val" class="ng-binding"><p>If you are unable to meet this goal, you may still be able to earn the award. Download the physician recommendation form, work with your doctor to create an alternate goal that is right for you, then submit the form to get credit and earn the award.</p></li>
+                                </ul><!-- end ngIf: goalobj.goaldescriptions.length!==0 --><!-- end ngRepeat: val in goalobj.goaldescriptions track by $index --><!-- ngIf: goalobj.goaldescriptions.length!==0 --><ul ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0" ng-repeat="val in goalobj.goaldescriptions track by $index" style="list-style:none;" class="ng-scope ng-hide">
+                                    <li ng-bind-html="val" class="ng-binding"><p>Eating healthy is essential to your overall well-being. Get your nutrition back on track today.</p></li>
+                                </ul><!-- end ngIf: goalobj.goaldescriptions.length!==0 --><!-- end ngRepeat: val in goalobj.goaldescriptions track by $index --><!-- ngIf: goalobj.goaldescriptions.length!==0 --><ul ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0" ng-repeat="val in goalobj.goaldescriptions track by $index" style="list-style:none;" class="ng-scope ng-hide">
+                                    <li ng-bind-html="val" class="ng-binding"><p>Good fitness is important for better focus, higher energy and overall happiness.</p></li>
+                                </ul><!-- end ngIf: goalobj.goaldescriptions.length!==0 --><!-- end ngRepeat: val in goalobj.goaldescriptions track by $index -->
+                            </td>
+                            <td>
+                                <!-- ngIf: goalobj.goalexcluded -->
+                            </td>
+                            <td><!-- ngIf: goalobj.earned.unit == 'dollars' -->
+                                <!-- ngIf: goalobj.earned.unit != 'dollars' --><span ng-if="goalobj.earned.unit != 'dollars'" class="ng-scope">
+                                <span class="ng-binding"> 
+                                    <span ng-bind="goalobj.earned.unit | symbol" class="ng-binding"></span></span>
+                                </span><!-- end ngIf: goalobj.earned.unit != 'dollars' -->
+                            </td>
+                            <td>
+
+
+
+                                <!-- ngRepeat: eachgoalval in goalobj.goalvalue --><p ng-repeat="eachgoalval in goalobj.goalvalue" style="line-height: 20px; font-weight: normal;" class="incentivesdate ng-scope">
+                                    <!-- ngIf: eachgoalval.unit == 'dollars' -->
+                                    <!-- ngIf: eachgoalval.unit != 'dollars' --><span ng-if="eachgoalval.unit != 'dollars'" class="ng-scope">
+                                <span class="ng-binding">25<span ng-bind="eachgoalval.unit | symbol" class="ng-binding"> points</span></span>
+                                    </span><!-- end ngIf: eachgoalval.unit != 'dollars' -->
+                                </p><!-- end ngRepeat: eachgoalval in goalobj.goalvalue -->
+                            </td>
+                            <!--<td> <span ng-bind="goalobj.frequency"></span> </td>-->
+                            <td> <span ng-show="goalobj.completedfreq" ng-bind="goalobj.completedfreq" class="ng-binding ng-hide">0</span> <span ng-show="goalobj.completedfreq" class="ng-hide">of</span> <span ng-show="goalobj.frequency" ng-bind="goalobj.frequency" class="ng-binding">1</span></td>
+                            <td> <!-- ngIf: goalobj.goalmet  && contentData.type == 'combined' --><span ng-bind="goalobj.rewardeddate" class="ng-binding"></span> </td>
+                            <!--<td> <span ng-bind="goalobj.startdate"></span>
+                                <span ng-if="goalobj.startdate !== null">-</span>
+                                <span ng-bind="goalobj.enddate"></span></td>-->
+                            <td>
+                                <!-- ngRepeat: rewardedDate in goalobj.rewardDates --><p ng-repeat="rewardedDate in goalobj.rewardDates" class="incentivesdate ng-scope">
+
+                                    <span ng-bind="rewardedDate.startDate" class="ng-binding">01/01/2017</span> -
+                                    <span ng-bind="rewardedDate.endDate" class="ng-binding">12/01/2017</span>
+                                </p><!-- end ngRepeat: rewardedDate in goalobj.rewardDates -->
+                                <!-- ngIf: !(goalobj.rewardDates) -->
+                            </td>
+                            <td></td>
+                        </tr><!-- end ngRepeat: goalobj in contentData.programs[$index].goals -->
+
+                        <tr class="panel-table-row ng-scope goalblack" style="background-color: #EBF1C1 !important;font-weight: normal;" ng-repeat-end="" ng-repeat="goalobj in contentData.programs[$index].goals" ng-class="goalobj.gkindicator===true ? 
+                                      goalobj.goalmet === true ? 'goalblack':'goalblack' : 
+                                      goalobj.goalmet === true ?'goalblack':'goalblack'">
+                            <td ng-show="goalobj.gkrulecode" class="ng-binding ng-hide"></td>
+                            
+                            <td ng-show="goalobj.gkrulecode" colspan="2" class="ng-hide">
+                                <span title="Gatekeeper" style="cursor:pointer" class="label label-danger">GK</span>
+                                <span ng-click="expandGoal(goalobj)" class="ng-binding">
+                                <!-- ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname --><i ng-show="!goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname" style="cursor:pointer;font-size: 12px" class="ng-scope">+</i><!-- end ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname -->
+                                <!-- ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname --><i ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname" style="cursor:pointer;font-size: 12px" class="ng-scope ng-hide">-</i><!-- end ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname -->
+                                Manage Your Heart Disease/Coronary Artery Disease</span>
+                                <br>
+                                <div class="customergoal ng-binding ng-hide" ng-show="goalobj.expand" ng-bind="goalobj.clientgoalname"></div>
+                                <!-- ngRepeat: val in goalobj.goaldescriptions track by $index --><!-- ngIf: goalobj.goaldescriptions.length!==0 --><ul ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0" ng-repeat="val in goalobj.goaldescriptions track by $index" style="list-style:none;" class="ng-scope ng-hide">
+                                    <li ng-bind-html="val" class="ng-binding"><p>CAD can weaken the heart muscle, but awareness and positive behavioral changes can help. Complete the Manage Coronary Artery Disease (CAD) online program.</p></li>
+                                </ul><!-- end ngIf: goalobj.goaldescriptions.length!==0 --><!-- end ngRepeat: val in goalobj.goaldescriptions track by $index --><!-- ngIf: goalobj.goaldescriptions.length!==0 --><ul ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0" ng-repeat="val in goalobj.goaldescriptions track by $index" style="list-style:none;" class="ng-scope ng-hide">
+                                    <li ng-bind-html="val" class="ng-binding"><p>If you are unable to meet this goal, you may still be able to earn the award. Download the physician recommendation form, work with your doctor to create an alternate goal that is right for you, then submit the form to get credit and earn the award.</p></li>
+                                </ul><!-- end ngIf: goalobj.goaldescriptions.length!==0 --><!-- end ngRepeat: val in goalobj.goaldescriptions track by $index --><!-- ngIf: goalobj.goaldescriptions.length!==0 --><ul ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0" ng-repeat="val in goalobj.goaldescriptions track by $index" style="list-style:none;" class="ng-scope ng-hide">
+                                    <li ng-bind-html="val" class="ng-binding"><p>Eating healthy is essential to your overall well-being. Get your nutrition back on track today.</p></li>
+                                </ul><!-- end ngIf: goalobj.goaldescriptions.length!==0 --><!-- end ngRepeat: val in goalobj.goaldescriptions track by $index --><!-- ngIf: goalobj.goaldescriptions.length!==0 --><ul ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0" ng-repeat="val in goalobj.goaldescriptions track by $index" style="list-style:none;" class="ng-scope ng-hide">
+                                    <li ng-bind-html="val" class="ng-binding"><p>Good fitness is important for better focus, higher energy and overall happiness.</p></li>
+                                </ul><!-- end ngIf: goalobj.goaldescriptions.length!==0 --><!-- end ngRepeat: val in goalobj.goaldescriptions track by $index -->
+                            </td>
+                            <td>
+                                <!-- ngIf: goalobj.goalexcluded -->
+                            </td>
+                            <td><!-- ngIf: goalobj.earned.unit == 'dollars' -->
+                                <!-- ngIf: goalobj.earned.unit != 'dollars' --><span ng-if="goalobj.earned.unit != 'dollars'" class="ng-scope">
+                                <span class="ng-binding"> 
+                                    <span ng-bind="goalobj.earned.unit | symbol" class="ng-binding"></span></span>
+                                </span><!-- end ngIf: goalobj.earned.unit != 'dollars' -->
+                            </td>
+                            <td>
+
+
+
+                                <!-- ngRepeat: eachgoalval in goalobj.goalvalue --><p ng-repeat="eachgoalval in goalobj.goalvalue" style="line-height: 20px; font-weight: normal;" class="incentivesdate ng-scope">
+                                    <!-- ngIf: eachgoalval.unit == 'dollars' -->
+                                    <!-- ngIf: eachgoalval.unit != 'dollars' --><span ng-if="eachgoalval.unit != 'dollars'" class="ng-scope">
+                                <span class="ng-binding">25<span ng-bind="eachgoalval.unit | symbol" class="ng-binding"> points</span></span>
+                                    </span><!-- end ngIf: eachgoalval.unit != 'dollars' -->
+                                </p><!-- end ngRepeat: eachgoalval in goalobj.goalvalue -->
+                            </td>
+                            <!--<td> <span ng-bind="goalobj.frequency"></span> </td>-->
+                            <td> <span ng-show="goalobj.completedfreq" ng-bind="goalobj.completedfreq" class="ng-binding ng-hide">0</span> <span ng-show="goalobj.completedfreq" class="ng-hide">of</span> <span ng-show="goalobj.frequency" ng-bind="goalobj.frequency" class="ng-binding">1</span></td>
+                            <td> <!-- ngIf: goalobj.goalmet  && contentData.type == 'combined' --><span ng-bind="goalobj.rewardeddate" class="ng-binding"></span> </td>
+                            <!--<td> <span ng-bind="goalobj.startdate"></span>
+                                <span ng-if="goalobj.startdate !== null">-</span>
+                                <span ng-bind="goalobj.enddate"></span></td>-->
+                            <td>
+                                <!-- ngRepeat: rewardedDate in goalobj.rewardDates --><p ng-repeat="rewardedDate in goalobj.rewardDates" class="incentivesdate ng-scope">
+
+                                    <span ng-bind="rewardedDate.startDate" class="ng-binding">01/01/2017</span> -
+                                    <span ng-bind="rewardedDate.endDate" class="ng-binding">12/01/2017</span>
+                                </p><!-- end ngRepeat: rewardedDate in goalobj.rewardDates -->
+                                <!-- ngIf: !(goalobj.rewardDates) -->
+                            </td>
+                            <td></td>
+                        </tr><!-- end ngRepeat: goalobj in contentData.programs[$index].goals -->
+
+                        <tr class="panel-table-row ng-scope goalblack" style="background-color: #EBF1C1 !important;font-weight: normal;" ng-repeat-end="" ng-repeat="goalobj in contentData.programs[$index].goals" ng-class="goalobj.gkindicator===true ? 
+                                      goalobj.goalmet === true ? 'goalblack':'goalblack' : 
+                                      goalobj.goalmet === true ?'goalblack':'goalblack'">
+                            <td ng-show="goalobj.gkrulecode" class="ng-binding ng-hide"></td>
+                            
+                            <td ng-show="goalobj.gkrulecode" colspan="2" class="ng-hide">
+                                <span title="Gatekeeper" style="cursor:pointer" class="label label-danger">GK</span>
+                                <span ng-click="expandGoal(goalobj)" class="ng-binding">
+                                <!-- ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname --><i ng-show="!goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname" style="cursor:pointer;font-size: 12px" class="ng-scope">+</i><!-- end ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname -->
+                                <!-- ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname --><i ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname" style="cursor:pointer;font-size: 12px" class="ng-scope ng-hide">-</i><!-- end ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname -->
+                                Manage your Chronic Obstructive Pulmonary Disease (COPD)</span>
+                                <br>
+                                <div class="customergoal ng-binding ng-hide" ng-show="goalobj.expand" ng-bind="goalobj.clientgoalname"></div>
+                                <!-- ngRepeat: val in goalobj.goaldescriptions track by $index --><!-- ngIf: goalobj.goaldescriptions.length!==0 --><ul ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0" ng-repeat="val in goalobj.goaldescriptions track by $index" style="list-style:none;" class="ng-scope ng-hide">
+                                    <li ng-bind-html="val" class="ng-binding"><p>Daily management and lifestyle changes can help preserve lung function. Complete the Manage Chronic Obstructive Pulmonary Disease (COPD) online program.</p></li>
+                                </ul><!-- end ngIf: goalobj.goaldescriptions.length!==0 --><!-- end ngRepeat: val in goalobj.goaldescriptions track by $index --><!-- ngIf: goalobj.goaldescriptions.length!==0 --><ul ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0" ng-repeat="val in goalobj.goaldescriptions track by $index" style="list-style:none;" class="ng-scope ng-hide">
+                                    <li ng-bind-html="val" class="ng-binding"><p>If you are unable to meet this goal, you may still be able to earn the award. Download the physician recommendation form, work with your doctor to create an alternate goal that is right for you, then submit the form to get credit and earn the award.</p></li>
+                                </ul><!-- end ngIf: goalobj.goaldescriptions.length!==0 --><!-- end ngRepeat: val in goalobj.goaldescriptions track by $index --><!-- ngIf: goalobj.goaldescriptions.length!==0 --><ul ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0" ng-repeat="val in goalobj.goaldescriptions track by $index" style="list-style:none;" class="ng-scope ng-hide">
+                                    <li ng-bind-html="val" class="ng-binding"><p>Eating healthy is essential to your overall well-being. Get your nutrition back on track today.</p></li>
+                                </ul><!-- end ngIf: goalobj.goaldescriptions.length!==0 --><!-- end ngRepeat: val in goalobj.goaldescriptions track by $index --><!-- ngIf: goalobj.goaldescriptions.length!==0 --><ul ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0" ng-repeat="val in goalobj.goaldescriptions track by $index" style="list-style:none;" class="ng-scope ng-hide">
+                                    <li ng-bind-html="val" class="ng-binding"><p>Good fitness is important for better focus, higher energy and overall happiness.</p></li>
+                                </ul><!-- end ngIf: goalobj.goaldescriptions.length!==0 --><!-- end ngRepeat: val in goalobj.goaldescriptions track by $index -->
+                            </td>
+                            <td>
+                                <!-- ngIf: goalobj.goalexcluded -->
+                            </td>
+                            <td><!-- ngIf: goalobj.earned.unit == 'dollars' -->
+                                <!-- ngIf: goalobj.earned.unit != 'dollars' --><span ng-if="goalobj.earned.unit != 'dollars'" class="ng-scope">
+                                <span class="ng-binding"> 
+                                    <span ng-bind="goalobj.earned.unit | symbol" class="ng-binding"></span></span>
+                                </span><!-- end ngIf: goalobj.earned.unit != 'dollars' -->
+                            </td>
+                            <td>
+
+
+
+                                <!-- ngRepeat: eachgoalval in goalobj.goalvalue --><p ng-repeat="eachgoalval in goalobj.goalvalue" style="line-height: 20px; font-weight: normal;" class="incentivesdate ng-scope">
+                                    <!-- ngIf: eachgoalval.unit == 'dollars' -->
+                                    <!-- ngIf: eachgoalval.unit != 'dollars' --><span ng-if="eachgoalval.unit != 'dollars'" class="ng-scope">
+                                <span class="ng-binding">25<span ng-bind="eachgoalval.unit | symbol" class="ng-binding"> points</span></span>
+                                    </span><!-- end ngIf: eachgoalval.unit != 'dollars' -->
+                                </p><!-- end ngRepeat: eachgoalval in goalobj.goalvalue -->
+                            </td>
+                            <!--<td> <span ng-bind="goalobj.frequency"></span> </td>-->
+                            <td> <span ng-show="goalobj.completedfreq" ng-bind="goalobj.completedfreq" class="ng-binding ng-hide">0</span> <span ng-show="goalobj.completedfreq" class="ng-hide">of</span> <span ng-show="goalobj.frequency" ng-bind="goalobj.frequency" class="ng-binding">1</span></td>
+                            <td> <!-- ngIf: goalobj.goalmet  && contentData.type == 'combined' --><span ng-bind="goalobj.rewardeddate" class="ng-binding"></span> </td>
+                            <!--<td> <span ng-bind="goalobj.startdate"></span>
+                                <span ng-if="goalobj.startdate !== null">-</span>
+                                <span ng-bind="goalobj.enddate"></span></td>-->
+                            <td>
+                                <!-- ngRepeat: rewardedDate in goalobj.rewardDates --><p ng-repeat="rewardedDate in goalobj.rewardDates" class="incentivesdate ng-scope">
+
+                                    <span ng-bind="rewardedDate.startDate" class="ng-binding">01/01/2017</span> -
+                                    <span ng-bind="rewardedDate.endDate" class="ng-binding">12/01/2017</span>
+                                </p><!-- end ngRepeat: rewardedDate in goalobj.rewardDates -->
+                                <!-- ngIf: !(goalobj.rewardDates) -->
+                            </td>
+                            <td></td>
+                        </tr><!-- end ngRepeat: goalobj in contentData.programs[$index].goals -->
+
+                        <tr class="panel-table-row ng-scope goalblack" style="background-color: #EBF1C1 !important;font-weight: normal;" ng-repeat-end="" ng-repeat="goalobj in contentData.programs[$index].goals" ng-class="goalobj.gkindicator===true ? 
+                                      goalobj.goalmet === true ? 'goalblack':'goalblack' : 
+                                      goalobj.goalmet === true ?'goalblack':'goalblack'">
+                            <td ng-show="goalobj.gkrulecode" class="ng-binding ng-hide"></td>
+                            
+                            <td ng-show="goalobj.gkrulecode" colspan="2" class="ng-hide">
+                                <span title="Gatekeeper" style="cursor:pointer" class="label label-danger">GK</span>
+                                <span ng-click="expandGoal(goalobj)" class="ng-binding">
+                                <!-- ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname --><i ng-show="!goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname" style="cursor:pointer;font-size: 12px" class="ng-scope">+</i><!-- end ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname -->
+                                <!-- ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname --><i ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname" style="cursor:pointer;font-size: 12px" class="ng-scope ng-hide">-</i><!-- end ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname -->
+                                Manage your Diabetes</span>
+                                <br>
+                                <div class="customergoal ng-binding ng-hide" ng-show="goalobj.expand" ng-bind="goalobj.clientgoalname"></div>
+                                <!-- ngRepeat: val in goalobj.goaldescriptions track by $index --><!-- ngIf: goalobj.goaldescriptions.length!==0 --><ul ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0" ng-repeat="val in goalobj.goaldescriptions track by $index" style="list-style:none;" class="ng-scope ng-hide">
+                                    <li ng-bind-html="val" class="ng-binding"><p>Learn how to reduce your risk for heart-disease and diabetes-related complications. Complete the Manage Diabetes online program.</p></li>
+                                </ul><!-- end ngIf: goalobj.goaldescriptions.length!==0 --><!-- end ngRepeat: val in goalobj.goaldescriptions track by $index --><!-- ngIf: goalobj.goaldescriptions.length!==0 --><ul ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0" ng-repeat="val in goalobj.goaldescriptions track by $index" style="list-style:none;" class="ng-scope ng-hide">
+                                    <li ng-bind-html="val" class="ng-binding"><p>If you are unable to meet this goal, you may still be able to earn the award. Download the physician recommendation form, work with your doctor to create an alternate goal that is right for you, then submit the form to get credit and earn the award.</p></li>
+                                </ul><!-- end ngIf: goalobj.goaldescriptions.length!==0 --><!-- end ngRepeat: val in goalobj.goaldescriptions track by $index --><!-- ngIf: goalobj.goaldescriptions.length!==0 --><ul ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0" ng-repeat="val in goalobj.goaldescriptions track by $index" style="list-style:none;" class="ng-scope ng-hide">
+                                    <li ng-bind-html="val" class="ng-binding"><p>Eating healthy is essential to your overall well-being. Get your nutrition back on track today.</p></li>
+                                </ul><!-- end ngIf: goalobj.goaldescriptions.length!==0 --><!-- end ngRepeat: val in goalobj.goaldescriptions track by $index --><!-- ngIf: goalobj.goaldescriptions.length!==0 --><ul ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0" ng-repeat="val in goalobj.goaldescriptions track by $index" style="list-style:none;" class="ng-scope ng-hide">
+                                    <li ng-bind-html="val" class="ng-binding"><p>Good fitness is important for better focus, higher energy and overall happiness.</p></li>
+                                </ul><!-- end ngIf: goalobj.goaldescriptions.length!==0 --><!-- end ngRepeat: val in goalobj.goaldescriptions track by $index -->
+                            </td>
+                            <td>
+                                <!-- ngIf: goalobj.goalexcluded -->
+                            </td>
+                            <td><!-- ngIf: goalobj.earned.unit == 'dollars' -->
+                                <!-- ngIf: goalobj.earned.unit != 'dollars' --><span ng-if="goalobj.earned.unit != 'dollars'" class="ng-scope">
+                                <span class="ng-binding"> 
+                                    <span ng-bind="goalobj.earned.unit | symbol" class="ng-binding"></span></span>
+                                </span><!-- end ngIf: goalobj.earned.unit != 'dollars' -->
+                            </td>
+                            <td>
+
+
+
+                                <!-- ngRepeat: eachgoalval in goalobj.goalvalue --><p ng-repeat="eachgoalval in goalobj.goalvalue" style="line-height: 20px; font-weight: normal;" class="incentivesdate ng-scope">
+                                    <!-- ngIf: eachgoalval.unit == 'dollars' -->
+                                    <!-- ngIf: eachgoalval.unit != 'dollars' --><span ng-if="eachgoalval.unit != 'dollars'" class="ng-scope">
+                                <span class="ng-binding">25<span ng-bind="eachgoalval.unit | symbol" class="ng-binding"> points</span></span>
+                                    </span><!-- end ngIf: eachgoalval.unit != 'dollars' -->
+                                </p><!-- end ngRepeat: eachgoalval in goalobj.goalvalue -->
+                            </td>
+                            <!--<td> <span ng-bind="goalobj.frequency"></span> </td>-->
+                            <td> <span ng-show="goalobj.completedfreq" ng-bind="goalobj.completedfreq" class="ng-binding ng-hide">0</span> <span ng-show="goalobj.completedfreq" class="ng-hide">of</span> <span ng-show="goalobj.frequency" ng-bind="goalobj.frequency" class="ng-binding">1</span></td>
+                            <td> <!-- ngIf: goalobj.goalmet  && contentData.type == 'combined' --><span ng-bind="goalobj.rewardeddate" class="ng-binding"></span> </td>
+                            <!--<td> <span ng-bind="goalobj.startdate"></span>
+                                <span ng-if="goalobj.startdate !== null">-</span>
+                                <span ng-bind="goalobj.enddate"></span></td>-->
+                            <td>
+                                <!-- ngRepeat: rewardedDate in goalobj.rewardDates --><p ng-repeat="rewardedDate in goalobj.rewardDates" class="incentivesdate ng-scope">
+
+                                    <span ng-bind="rewardedDate.startDate" class="ng-binding">01/01/2017</span> -
+                                    <span ng-bind="rewardedDate.endDate" class="ng-binding">12/01/2017</span>
+                                </p><!-- end ngRepeat: rewardedDate in goalobj.rewardDates -->
+                                <!-- ngIf: !(goalobj.rewardDates) -->
+                            </td>
+                            <td></td>
+                        </tr><!-- end ngRepeat: goalobj in contentData.programs[$index].goals -->
+
+                        <tr class="panel-table-row ng-scope goalblack" style="background-color: #EBF1C1 !important;font-weight: normal;" ng-repeat-end="" ng-repeat="goalobj in contentData.programs[$index].goals" ng-class="goalobj.gkindicator===true ? 
+                                      goalobj.goalmet === true ? 'goalblack':'goalblack' : 
+                                      goalobj.goalmet === true ?'goalblack':'goalblack'">
+                            <td ng-show="goalobj.gkrulecode" class="ng-binding ng-hide"></td>
+                            
+                            <td ng-show="goalobj.gkrulecode" colspan="2" class="ng-hide">
+                                <span title="Gatekeeper" style="cursor:pointer" class="label label-danger">GK</span>
+                                <span ng-click="expandGoal(goalobj)" class="ng-binding">
+                                <!-- ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname --><i ng-show="!goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname" style="cursor:pointer;font-size: 12px" class="ng-scope">+</i><!-- end ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname -->
+                                <!-- ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname --><i ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname" style="cursor:pointer;font-size: 12px" class="ng-scope ng-hide">-</i><!-- end ngIf: goalobj.goaldescriptions.length!==0 || goalobj.clientgoalname -->
+                                Managing Heart Failure</span>
+                                <br>
+                                <div class="customergoal ng-binding ng-hide" ng-show="goalobj.expand" ng-bind="goalobj.clientgoalname"></div>
+                                <!-- ngRepeat: val in goalobj.goaldescriptions track by $index --><!-- ngIf: goalobj.goaldescriptions.length!==0 --><ul ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0" ng-repeat="val in goalobj.goaldescriptions track by $index" style="list-style:none;" class="ng-scope ng-hide">
+                                    <li ng-bind-html="val" class="ng-binding"><p>Daily managing and monitoring is the key to living a longer life. Complete the Manage Heart Failure online program.</p></li>
+                                </ul><!-- end ngIf: goalobj.goaldescriptions.length!==0 --><!-- end ngRepeat: val in goalobj.goaldescriptions track by $index --><!-- ngIf: goalobj.goaldescriptions.length!==0 --><ul ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0" ng-repeat="val in goalobj.goaldescriptions track by $index" style="list-style:none;" class="ng-scope ng-hide">
+                                    <li ng-bind-html="val" class="ng-binding"><p>If you are unable to meet this goal, you may still be able to earn the award. Download the physician recommendation form, work with your doctor to create an alternate goal that is right for you, then submit the form to get credit and earn the award.</p></li>
+                                </ul><!-- end ngIf: goalobj.goaldescriptions.length!==0 --><!-- end ngRepeat: val in goalobj.goaldescriptions track by $index --><!-- ngIf: goalobj.goaldescriptions.length!==0 --><ul ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0" ng-repeat="val in goalobj.goaldescriptions track by $index" style="list-style:none;" class="ng-scope ng-hide">
+                                    <li ng-bind-html="val" class="ng-binding"><p>Eating healthy is essential to your overall well-being. Get your nutrition back on track today.</p></li>
+                                </ul><!-- end ngIf: goalobj.goaldescriptions.length!==0 --><!-- end ngRepeat: val in goalobj.goaldescriptions track by $index --><!-- ngIf: goalobj.goaldescriptions.length!==0 --><ul ng-show="goalobj.expand" ng-if="goalobj.goaldescriptions.length!==0" ng-repeat="val in goalobj.goaldescriptions track by $index" style="list-style:none;" class="ng-scope ng-hide">
+                                    <li ng-bind-html="val" class="ng-binding"><p>Good fitness is important for better focus, higher energy and overall happiness.</p></li>
+                                </ul><!-- end ngIf: goalobj.goaldescriptions.length!==0 --><!-- end ngRepeat: val in goalobj.goaldescriptions track by $index -->
+                            </td>
+                            <td>
+                                <!-- ngIf: goalobj.goalexcluded -->
+                            </td>
+                            <td><!-- ngIf: goalobj.earned.unit == 'dollars' -->
+                                <!-- ngIf: goalobj.earned.unit != 'dollars' --><span ng-if="goalobj.earned.unit != 'dollars'" class="ng-scope">
+                                <span class="ng-binding"> 
+                                    <span ng-bind="goalobj.earned.unit | symbol" class="ng-binding"></span></span>
+                                </span><!-- end ngIf: goalobj.earned.unit != 'dollars' -->
+                            </td>
+                            <td>
+
+
+
+                                <!-- ngRepeat: eachgoalval in goalobj.goalvalue --><p ng-repeat="eachgoalval in goalobj.goalvalue" style="line-height: 20px; font-weight: normal;" class="incentivesdate ng-scope">
+                                    <!-- ngIf: eachgoalval.unit == 'dollars' -->
+                                    <!-- ngIf: eachgoalval.unit != 'dollars' --><span ng-if="eachgoalval.unit != 'dollars'" class="ng-scope">
+                                <span class="ng-binding">25<span ng-bind="eachgoalval.unit | symbol" class="ng-binding"> points</span></span>
+                                    </span><!-- end ngIf: eachgoalval.unit != 'dollars' -->
+                                </p><!-- end ngRepeat: eachgoalval in goalobj.goalvalue -->
+                            </td>
+                            <!--<td> <span ng-bind="goalobj.frequency"></span> </td>-->
+                            <td> <span ng-show="goalobj.completedfreq" ng-bind="goalobj.completedfreq" class="ng-binding ng-hide">0</span> <span ng-show="goalobj.completedfreq" class="ng-hide">of</span> <span ng-show="goalobj.frequency" ng-bind="goalobj.frequency" class="ng-binding">1</span></td>
+                            <td> <!-- ngIf: goalobj.goalmet  && contentData.type == 'combined' --><span ng-bind="goalobj.rewardeddate" class="ng-binding"></span> </td>
+                            <!--<td> <span ng-bind="goalobj.startdate"></span>
+                                <span ng-if="goalobj.startdate !== null">-</span>
+                                <span ng-bind="goalobj.enddate"></span></td>-->
+                            <td>
+                                <!-- ngRepeat: rewardedDate in goalobj.rewardDates --><p ng-repeat="rewardedDate in goalobj.rewardDates" class="incentivesdate ng-scope">
+
+                                    <span ng-bind="rewardedDate.startDate" class="ng-binding">01/01/2017</span> -
+                                    <span ng-bind="rewardedDate.endDate" class="ng-binding">12/01/2017</span>
+                                </p><!-- end ngRepeat: rewardedDate in goalobj.rewardDates -->
+                                <!-- ngIf: !(goalobj.rewardDates) -->
+                            </td>
+                            <td></td>
+                        </tr><!-- end ngRepeat: goalobj in contentData.programs[$index].goals --><!-- end ngRepeat: progobj in contentData.programs track by $index -->
+                    </tbody><!-- end ngRepeat: contentData in contentData.groups | orderBy:'order' -->
+                    
+
+                    <!-- end ngRepeat: contentData in contentData.groups | orderBy:'order' -->
+                </table>
+
+ 
+        </div>
+	    </div>
+	  </div>
+	</div>
+	<script src="js/jquery.js"></script>
+	<script src='components/bootstrap/js/bootstrap.min.js'></script>
+	<script type="text/javascript" src="js/modernizr.custom.86080.js"></script> <!-- for background image slider -->
+</body>
+</html>
